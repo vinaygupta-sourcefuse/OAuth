@@ -1,0 +1,43 @@
+<div class="row justify-content-md-center">
+  <div class="col-sm">
+    <!-- <lib-ngx-notification></lib-ngx-notification> -->
+    <nb-layout>
+      <nb-layout-column>
+        <nb-chat
+          [title]="user ? 'User - ' + user.firstName : 'join the chat room'"
+          size="medium"
+        >
+          <nb-chat-message
+            *ngFor="let msg of messages"
+            [message]="msg.body"
+            [sender]="msg.sender"
+            [reply]="msg.reply"
+          >
+          </nb-chat-message>
+          <nb-chat-form
+            (send)="
+              sendMessage(
+                $event,
+                user.firstName,
+                'http://www.reactiongifs.com/r/wnd1.gif'
+              )
+            "
+            [showButton]="false"
+            [dropFiles]="true"
+          >
+          </nb-chat-form>
+        </nb-chat>
+      </nb-layout-column>
+      <nb-layout-column>
+        <div>
+          <p>Chat Room 1</p>
+          <button (click)="getMessages()">Join</button>
+          <button (click)="leaveRoom()">Leave</button>
+        </div>
+        <div>
+          <button class="btn-primary" (click)="logOut()">logout</button>
+        </div>
+      </nb-layout-column>
+    </nb-layout>
+  </div>
+</div>
